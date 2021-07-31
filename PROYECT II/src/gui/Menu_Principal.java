@@ -110,7 +110,7 @@ public class Menu_Principal extends JFrame {
               desktopPane = new JDesktopPane(){
                Image img = javax.imageio.ImageIO.read(
 
-        new java.net.URL(getClass().getResource("/imagenes/cibertec1.jpg"), "cibertec1.jpg"));
+        new java.net.URL(getClass().getResource("/imagenes/cibertec.png"), "cibertec.png"));
                public void paintComponent(Graphics g){
 
                     super.paintComponent(g);
