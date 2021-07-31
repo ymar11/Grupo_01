@@ -1,25 +1,24 @@
 package clases;
 
 public class Curso {
-
-	//	Atributos privados
+	
+//	Atributos privados
 	
 	private int codCurso, ciclo, creditos, horas;
 	private String asignatura;
 	
-	//	Constructor
-
+//	Constructor
 	public Curso(int codCurso, int ciclo, int creditos, int horas, String asignatura) {
-		
+	
 		this.codCurso = codCurso;
 		this.ciclo = ciclo;
 		this.creditos = creditos;
 		this.horas = horas;
 		this.asignatura = asignatura;
-	
 	}
-	//  Métodos de acceso público: set/get
-
+	
+//  Métodos de acceso público: set/get
+	
 	public int getCodCurso() {
 		return codCurso;
 	}
@@ -60,10 +59,8 @@ public class Curso {
 		this.asignatura = asignatura;
 	}
 
+
 	
 	
 	
 }
-
-
-	
