@@ -11,7 +11,7 @@ import clases.Alumno;
 
 	
 	public class ArregloAlumnos {
-		 //comentario
+		 //commit
 			//atributo privado, array de tipo alumno
 			private ArrayList<Alumno>alu;
 			
