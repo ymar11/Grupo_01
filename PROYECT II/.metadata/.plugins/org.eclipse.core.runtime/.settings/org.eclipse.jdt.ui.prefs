@@ -1,0 +1,8 @@
+content_assist_disabled_computers=org.eclipse.jdt.ui.javaTypeProposalCategory\u0000org.eclipse.jdt.ui.textProposalCategory\u0000
+eclipse.preferences.version=1
+org.eclipse.jdt.internal.ui.navigator.layout=2
+org.eclipse.jdt.internal.ui.navigator.librariesnode=true
+org.eclipse.jdt.ui.formatterprofiles.version=21
+spelling_locale_initialized=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

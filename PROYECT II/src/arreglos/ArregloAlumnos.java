@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 import clases.Alumno;
 
-//comentario
+
 	
 	public class ArregloAlumnos {
-		 
+		 //comentario
 			//atributo privado, array de tipo alumno
 			private ArrayList<Alumno>alu;
 			
