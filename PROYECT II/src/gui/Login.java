@@ -38,6 +38,7 @@ public class Login extends JFrame implements ActionListener {
 				try {
 					Login frame = new Login();
 					frame.setVisible(true);
+					
 					// CENTRAR VENTANA EN LA PANTALLA
 					frame.setLocationRelativeTo(null);
 					
@@ -123,21 +124,32 @@ public class Login extends JFrame implements ActionListener {
 		if (user.equals("grupo01")&& pass.equals("123")) {
 		this.dispose(); /// CERRAR VENTANA ACTUAL (LOGIN) 
 
-		JOptionPane.showMessageDialog(this, "Bienvenidos a nuestro sistema ");
+		mensaje ("Bienvenidos a nuestro sistema ");
 
 		Menu_Principal prin = new Menu_Principal (); // VENTANA PRINCIPAL REPRESENTADA POR VARIABLE PRIN
 
 		prin.setLocationRelativeTo(this); // THIS ES UBICACIÓN
 
-		prin.setVisible(true);} // PARA QUE LA VENTANA SEA VISIBLE 	
+		prin.setVisible(true); // PARA QUE LA VENTANA SEA VISIBLE 	
+		prin.setExtendedState(MAXIMIZED_BOTH); 
+
+		
+		}
+
 		
 		else {			
-		JOptionPane.showMessageDialog(this, "Usurario o contraseña incorrecto"); 
+		mensaje ( "Usurario o contraseña incorrecto"); 
 		txtUsuario.setText("");
 		Jpassword.setText("");
 		txtUsuario.requestFocus();
 		}
 	}
+	
+	  void mensaje(String cadenaMensaje) {
+			JOptionPane.showMessageDialog(null, cadenaMensaje);
+		    }
+		
+	  
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
 		
 		System.exit (0);

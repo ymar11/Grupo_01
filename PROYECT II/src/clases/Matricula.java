@@ -74,7 +74,5 @@ public class Matricula {
 		this.estado = estado;
 	}
 	
-	
-	
 
 }

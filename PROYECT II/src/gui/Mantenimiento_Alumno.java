@@ -160,6 +160,7 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 		scrollPaneA.setBounds(10, 200, 697, 227);
 		getContentPane().add(scrollPaneA);
 		
+		
 		tblTabla = new JTable();
 		tblTabla.addKeyListener(this);
 		tblTabla.addMouseListener(this);
@@ -218,6 +219,8 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 		btnReportar.addActionListener(this);
 		btnReportar.setBounds(342, 166, 149, 23);
 		getContentPane().add(btnReportar);
+		
+		listar ();
 	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnReportar) {
