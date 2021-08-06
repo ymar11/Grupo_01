@@ -26,6 +26,11 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
+import java.awt.SystemColor;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class gui_curso extends JDialog implements ActionListener, MouseListener, KeyListener {
 
@@ -73,13 +78,16 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 	 * Create the dialog.
 	 */
 	public gui_curso() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(gui_curso.class.getResource("/imagenes/Asignatura.png")));
 		setBounds(100, 100, 933, 620);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(SystemColor.inactiveCaption);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		lblNewLabel = new JLabel("Codigo");
+		lblNewLabel.setIcon(null);
 		lblNewLabel.setBounds(21, 10, 46, 30);
 		contentPanel.add(lblNewLabel);
 		
@@ -125,37 +133,44 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 		contentPanel.add(comboBox);
 		
 		btnAdicionar = new JButton("Adicionar");
+		btnAdicionar.setIcon(new ImageIcon(gui_curso.class.getResource("/imagenes/add.png")));
 		btnAdicionar.addActionListener(this);
 		btnAdicionar.setBounds(543, 15, 145, 30);
 		contentPanel.add(btnAdicionar);
 		
 		btnEliminar = new JButton("Eliminar");
+		btnEliminar.setIcon(new ImageIcon(gui_curso.class.getResource("/imagenes/delete.png")));
 		btnEliminar.addActionListener(this);
 		btnEliminar.setBounds(758, 15, 129, 30);
 		contentPanel.add(btnEliminar);
 		
 		btnModificar = new JButton("Modificar");
+		btnModificar.setIcon(new ImageIcon(gui_curso.class.getResource("/imagenes/editor.png")));
 		btnModificar.addActionListener(this);
 		btnModificar.setBounds(543, 63, 145, 30);
 		contentPanel.add(btnModificar);
 		
 		btnConsultar = new JButton("Consultar");
+		btnConsultar.setIcon(new ImageIcon(gui_curso.class.getResource("/imagenes/buscar.png")));
 		btnConsultar.addActionListener(this);
 		btnConsultar.setBounds(758, 63, 129, 30);
 		contentPanel.add(btnConsultar);
 		
 		btnReportar = new JButton("Reportar");
+		btnReportar.setIcon(new ImageIcon(gui_curso.class.getResource("/imagenes/reporte.png")));
 		btnReportar.addActionListener(this);
-		btnReportar.setBounds(614, 115, 170, 30);
+		btnReportar.setBounds(701, 341, 170, 30);
 		contentPanel.add(btnReportar);
 		
 		scrollPane = new JScrollPane();
+		scrollPane.setViewportBorder(new LineBorder(new Color(0, 0, 0)));
 		scrollPane.setBounds(37, 190, 858, 141);
 		contentPanel.add(scrollPane);
 		
 		
 		
 		table = new JTable();
+		table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		table.addKeyListener(this);
 		table.addMouseListener(this);
 		table.setModel(new DefaultTableModel(
@@ -209,7 +224,7 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 	
 		}
 		
-		listar();
+		
 	}
 	
 	
@@ -308,8 +323,7 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 					
 					modelo.addRow(fila);
 							
-					}
-		
+					}		
 	}
 			
 	 // Métodos tipo void (con parámetros)
@@ -364,7 +378,7 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 			x.setCreditos(creditos);
 			x.setCiclo(ciclo);
 						
-			ac.actualizarArchivo();	
+			ac.cargarArchivo();	
 			listar();
 			limpieza();
 			

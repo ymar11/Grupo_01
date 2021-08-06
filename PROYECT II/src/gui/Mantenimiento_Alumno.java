@@ -222,6 +222,7 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 		
 		listar ();
 	}
+	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnReportar) {
 			actionPerformedBtnReportar(e);

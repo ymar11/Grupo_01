@@ -38,6 +38,14 @@ public class Menu_Principal extends JFrame {
 	private JMenuItem mntmNewMenuItem_1;
 	private JMenuItem mntmNewMenuItem_2;
 	private JDesktopPane desktopPane;
+	private JMenuItem mntmNewMenuItem_3;
+	private JMenuItem mntmNewMenuItem_4;
+	private JMenuItem menuItem;
+	private JMenuItem mntmNewMenuItem_5;
+	private JMenuItem mntmNewMenuItem_6;
+	private JMenuItem mntmNewMenuItem_7;
+	private JMenuItem menuItem_1;
+	private JMenuItem mntmNewMenuItem_8;
 
 	/**
 	 * Launch the application.
@@ -90,15 +98,33 @@ public class Menu_Principal extends JFrame {
 		mntmNewMenuItem = new JMenuItem("Matr\u00EDcula");
 		mnNewMenu_1.add(mntmNewMenuItem);
 		
+		mntmNewMenuItem_6 = new JMenuItem("Retiro ");
+		mnNewMenu_1.add(mntmNewMenuItem_6);
+		
 		mnNewMenu_2 = new JMenu("M\u00F3dulo de Consulta");
 		mnNewMenu_2.setIcon(new ImageIcon(Menu_Principal.class.getResource("/imagenes/buscar.png")));
 		mnNewMenu_2.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		menuBar.add(mnNewMenu_2);
 		
+		mntmNewMenuItem_7 = new JMenuItem("Alumnos - Cursos");
+		mnNewMenu_2.add(mntmNewMenuItem_7);
+		
+		mntmNewMenuItem_8 = new JMenuItem("Matr\u00EDculas - Retiros");
+		mnNewMenu_2.add(mntmNewMenuItem_8);
+		
 		mnNewMenu_3 = new JMenu("M\u00F3dulo de Reporte");
 		mnNewMenu_3.setIcon(new ImageIcon(Menu_Principal.class.getResource("/imagenes/ventas.png")));
 		mnNewMenu_3.setFont(new Font("Segoe UI", Font.BOLD, 13));
 		menuBar.add(mnNewMenu_3);
+		
+		mntmNewMenuItem_3 = new JMenuItem("Alumnos con matr\u00EDcula pendiente");
+		mnNewMenu_3.add(mntmNewMenuItem_3);
+		
+		mntmNewMenuItem_4 = new JMenuItem("Alumnos con Matr\u00EDcula vigente");
+		mnNewMenu_3.add(mntmNewMenuItem_4);
+		
+		mntmNewMenuItem_5 = new JMenuItem("Alumnos matr\u00EDculados por curso");
+		mnNewMenu_3.add(mntmNewMenuItem_5);
 		
 		mnNewMenu_4 = new JMenu("Integrantes");
 		mnNewMenu_4.setIcon(new ImageIcon(Menu_Principal.class.getResource("/imagenes/clientes.png")));
@@ -125,6 +151,14 @@ public class Menu_Principal extends JFrame {
 		
 		getContentPane().add(desktopPane, BorderLayout.CENTER);
 		
+		menuItem = new JMenuItem("New menu item");
+		menuItem.setBounds(577, 45, 75, 9);
+		desktopPane.add(menuItem);
+		
+		menuItem_1 = new JMenuItem("New menu item");
+		menuItem_1.setBounds(394, 11, 75, 9);
+		desktopPane.add(menuItem_1);
+		
 		p = new JPanel();
 		p.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
@@ -138,5 +172,4 @@ public class Menu_Principal extends JFrame {
 		 setContentPane(p);    */ 
 
 	}
-
 }

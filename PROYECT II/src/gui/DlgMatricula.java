@@ -238,6 +238,8 @@ public class DlgMatricula extends JDialog implements ActionListener, MouseListen
 			actionPerformedBtnNewButton(e);
 		}
 	}
+	
+	
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
 		int codAlumno = leerCodigoAlumno();
 		if (am.buscar(codAlumno)==null) {
