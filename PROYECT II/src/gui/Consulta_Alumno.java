@@ -148,7 +148,7 @@ public class Consulta_Alumno extends JDialog implements ActionListener {
 						
 			txtAlumno.requestFocus();
 
-			txtS1.setText("Código de Alumno     \t :  " + a.getCodAlumno() + "\n")  ; 				
+			txtS1.setText("Código de Alumno     \t :  " + a.getCodAlumno() + "\n") ; 				
 			txtS1.setText("Nombres                \t :  " + a.getNombres() + "\n");
 			txtS1.setText("Apellidos              \t :  " + a.getApellidos());
 			txtS1.setText("DNI N°                 \t :  " + a.getDni());
