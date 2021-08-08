@@ -281,6 +281,7 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 			return txtAsignatura.getText().trim();
 		}	
 	
+		
 		void navegar(){
 
 			int fila=table.getSelectedRow();

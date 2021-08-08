@@ -75,21 +75,20 @@ public class ArregloCurso {
 							
 							//recuperar los valores
 							codCurso = Integer.parseInt(s[0].trim());
-							horas=Integer.parseInt(s[1].trim());
+							ciclo=Integer.parseInt(s[1].trim());
 							creditos=Integer.parseInt(s[2].trim());
-							ciclo=Integer.parseInt(s[3].trim());
-							asignatura=s[4].trim();
+							horas=Integer.parseInt(s[3].trim());														
+							asignatura= s[4].trim();
 							
 							//adicionarlos al Arraylist
-							adicionar (new Curso (codCurso, horas, creditos, ciclo, asignatura));
+							adicionar (new Curso (codCurso, ciclo, creditos, horas, asignatura));
 					}
 						br.close();
 					}
 					catch (Exception e) {
 						// TODO: handle exception
 						 System.out.println("Error: cargarCursos-->: "+e.getMessage() );
-					}
-						
+					}				
 						
 			}
 		
@@ -110,11 +109,11 @@ public class ArregloCurso {
 				 //obtenemos la dirección memoria del objeto
 				x=obtener(i);
 				//pasamos los datos a una cadena
-				linea=	x.getCodCurso() 		+";"+
+				linea=	x.getCodCurso() 	+";"+
+						x.getCiclo()        +";"+
+						x.getCreditos()     +";"+
 						x.getHoras()		+";"+
-						x.getCreditos()   +";"+
-						x.getAsignatura()   +";"+
-						x.getCiclo();
+						x.getAsignatura()   ;
 				//incorporamos la línea a pw
 				pw.println(linea);
 				
@@ -125,7 +124,7 @@ public class ArregloCurso {
 		}
 		catch (Exception e) {
 			// TODO: handle exception
-                                      System.out.println("Error: garbarCursos-->: "+e.getMessage() );
+              System.out.println("Error: garbarCursos-->: " + e.getMessage() );
 		}
 			
 	}		

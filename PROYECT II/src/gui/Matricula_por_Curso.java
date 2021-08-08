@@ -40,16 +40,15 @@ public class Matricula_por_Curso extends JDialog {
 	 * Create the dialog.
 	 */
 	public Matricula_por_Curso() {
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 610, 446);
 		getContentPane().setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(128, 188, 233, -126);
+		scrollPane.setBounds(10, 38, 561, 345);
 		getContentPane().add(scrollPane);
 		
 		txtS = new JTextArea();
-		txtS.setBounds(216, 114, 5, 22);
-		getContentPane().add(txtS);
+		scrollPane.setViewportView(txtS);
 		
 		listar ();
 	}
@@ -69,19 +68,19 @@ public class Matricula_por_Curso extends JDialog {
 		Alumno a;
 		Curso c;
 		
-		txtS.setText("");
-		
 		for (int j=0; j<ac.tamanio(); j++) {
+			a = aa.obtener(j);
 			c = ac.obtener(j);
-			if (c.getEstado() == 0) {
-				a = aa.buscar(i.getCodigoPaciente());
-				c = ac.buscar(i.getNumeroCama());
+			if (a.getEstado() == 0) {
+				a = aa.buscar(a.getCodAlumno());
+				c = ac.buscar(c.getCodCurso());
 				
 				
-				c = ac.buscar(a.getCodAlumno());
-				imprimir("Código de atención :  " + a.getCodAlumno());
-				imprimir("Código de atención :  " + c.getCodCurso());				
-				imprimir("Código de paciente :  " + a.getNombres());
+//				c = ac.buscar(a.getCodAlumno());
+				imprimir("Código de Alumno :  " + a.getCodAlumno());
+				imprimir("Código de Curso  :  " + c.getCodCurso());				
+				imprimir("Ciclo N°         :  " + c.getCiclo());
+				imprimir("Nombre de alumno :  " + a.getNombres());
 				//imprimir("Nombres            :  " + p.getNombres());
 				// imprimir("Apellidos          :  " + p.getApellidos());
 				// imprimir("Fecha de atención  :  " + a.getFechaAtencion()
