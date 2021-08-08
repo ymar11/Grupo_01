@@ -9,7 +9,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import arreglos.ArregloAlumnos;
+import arreglos.ArregloCurso;
+
+import arreglos.ArregloMatricula;
 import arreglos.ArregloRetiro;
+import clases.Alumno;
+import clases.Matricula;
 import clases.Retiro;
 
 import javax.swing.JTextField;
@@ -27,8 +33,13 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+import java.awt.SystemColor;
+import java.awt.Color;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+import javax.swing.JInternalFrame;
 
-public class Modulo_Registro extends JDialog implements ActionListener, MouseListener, KeyListener {
+public class Modulo_Retiro extends JDialog implements ActionListener, MouseListener, KeyListener {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
@@ -52,18 +63,22 @@ public class Modulo_Registro extends JDialog implements ActionListener, MouseLis
 	private DefaultTableModel modelo;
 
 	ArregloRetiro ar = new ArregloRetiro();
-	private JTextArea txtS;
 	private JLabel lblNMatrcula_2;
 	private JLabel lblNMatrcula_3;
 	private JTextField txtFecha;
 	private JTextField txtHora;
+	private JLabel lblNewLabel_1;
+	
+	ArregloAlumnos aa = new ArregloAlumnos();
+	ArregloCurso ac = new ArregloCurso();
+	ArregloMatricula am = new ArregloMatricula();
 	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			Modulo_Registro dialog = new Modulo_Registro();
+			Modulo_Retiro dialog = new Modulo_Retiro();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -74,8 +89,12 @@ public class Modulo_Registro extends JDialog implements ActionListener, MouseLis
 	/**
 	 * Create the dialog.
 	 */
-	public Modulo_Registro() {
-		setBounds(100, 100, 638, 517);
+	public Modulo_Retiro() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Modulo_Retiro.class.getResource("/imagenes/Salir (2).png")));
+		setTitle("Retiros");
+		getContentPane().setBackground(SystemColor.activeCaption);
+		setBackground(Color.WHITE);
+		setBounds(100, 100, 677, 526);
 		getContentPane().setLayout(null);
 		contentPanel.setBounds(0, 0, 566, 1);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -137,7 +156,7 @@ public class Modulo_Registro extends JDialog implements ActionListener, MouseLis
 		getContentPane().add(lblCodAlumno_1);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(23, 89, 467, 219);
+		scrollPane.setBounds(23, 122, 467, 323);
 		getContentPane().add(scrollPane);
 		
 		tblTabla = new JTable();
@@ -154,28 +173,28 @@ public class Modulo_Registro extends JDialog implements ActionListener, MouseLis
 		listar();
 		
 		btnAdicionar = new JButton("ADICIONAR");
+		btnAdicionar.setIcon(new ImageIcon(Modulo_Retiro.class.getResource("/imagenes/adicionar.png")));
 		btnAdicionar.addActionListener(this);
-		btnAdicionar.setBounds(500, 89, 114, 23);
+		btnAdicionar.setBounds(500, 122, 151, 41);
 		getContentPane().add(btnAdicionar);
 		
 		btnConsultar = new JButton("CONSULTAR");
+		btnConsultar.setIcon(new ImageIcon(Modulo_Retiro.class.getResource("/imagenes/consultar.png")));
 		btnConsultar.addActionListener(this);
-		btnConsultar.setBounds(500, 123, 114, 23);
+		btnConsultar.setBounds(500, 174, 151, 41);
 		getContentPane().add(btnConsultar);
 		
 		btnModificar = new JButton("MODIFICAR");
+		btnModificar.setIcon(new ImageIcon(Modulo_Retiro.class.getResource("/imagenes/modificar.png")));
 		btnModificar.addActionListener(this);
-		btnModificar.setBounds(500, 157, 114, 23);
+		btnModificar.setBounds(500, 226, 151, 41);
 		getContentPane().add(btnModificar);
 		
 		btnEliminar = new JButton("ELIMINAR");
+		btnEliminar.setIcon(new ImageIcon(Modulo_Retiro.class.getResource("/imagenes/Salir (2).png")));
 		btnEliminar.addActionListener(this);
-		btnEliminar.setBounds(500, 191, 114, 23);
+		btnEliminar.setBounds(500, 278, 151, 41);
 		getContentPane().add(btnEliminar);
-		
-		txtS = new JTextArea();
-		txtS.setBounds(23, 319, 467, 146);
-		getContentPane().add(txtS);
 		
 		lblNMatrcula_2 = new JLabel("Fecha:");
 		lblNMatrcula_2.setBounds(194, 29, 57, 14);
@@ -194,6 +213,11 @@ public class Modulo_Registro extends JDialog implements ActionListener, MouseLis
 		txtHora.setColumns(10);
 		txtHora.setBounds(243, 57, 73, 20);
 		getContentPane().add(txtHora);
+		
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(Modulo_Retiro.class.getResource("/imagenes/file.png")));
+		lblNewLabel_1.setBounds(510, -11, 178, 163);
+		getContentPane().add(lblNewLabel_1);
 	}
 	
 	
@@ -212,6 +236,9 @@ public class Modulo_Registro extends JDialog implements ActionListener, MouseLis
 		}
 	}
 	protected void actionPerformedBtnAdicionar(ActionEvent arg0) {
+		Matricula m = am.buscar(leerNumMatricula());
+		
+		if(m != null) {
 		int nMatricula = leerNumMatricula();
 		int nRetiro = ar.codigoCorrelativoNumRetiro();
 		String fecha = fechaActual();
@@ -222,6 +249,23 @@ public class Modulo_Registro extends JDialog implements ActionListener, MouseLis
 		ar.adicionar(nuevo);
 		listar();
 		limpieza();
+		
+		/* Alumno a = aa.buscar(m.getCodAlumno());
+		a.setEstado(2); */ 
+		
+		am.eliminar(m);
+		
+		
+		
+		}else {
+			mensaje("El número de matrícula " + leerNumMatricula() + " no existe");
+			txtNumMatricula.setText("");
+			txtNumRetiro.setText("");
+			txtFecha.setText("");
+			txtHora.setText("");
+			txtNumMatricula.requestFocus();
+		}
+	
 	}
 	
 	
@@ -280,6 +324,9 @@ public class Modulo_Registro extends JDialog implements ActionListener, MouseLis
 	
 	void limpieza() {
 		txtNumMatricula.setText("");
+		txtNumRetiro.setText("");
+		txtFecha.setText("");
+		txtHora.setText("");
 		txtNumMatricula.requestFocus();
 	}
 	
@@ -300,15 +347,7 @@ public class Modulo_Registro extends JDialog implements ActionListener, MouseLis
 			txtHora.setText("");
 			txtNumMatricula.requestFocus();
 		}
-	}
-	
-	void imprimir() {
-		imprimir("");
-	}
-	
-	void imprimir(String s) {
-		txtS.append(s + "\n");
-	}
+	}	
 	
 	void mensaje(String s) {
 		JOptionPane.showMessageDialog(this, s);

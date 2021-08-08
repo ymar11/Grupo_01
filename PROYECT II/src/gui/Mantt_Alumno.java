@@ -135,7 +135,7 @@ public class Mantt_Alumno extends JDialog implements ActionListener, MouseListen
 		
 		cboEstado = new JComboBox();
 		cboEstado.setBounds(66, 140, 115, 22);
-		cboEstado.setModel(new DefaultComboBoxModel(new String[] {"Registrado ", "Matriculado ", "Retirado "}));
+		cboEstado.setModel(new DefaultComboBoxModel (new String[] {"Registrado ", "Matriculado ", "Retirado "}));
 		getContentPane().add(cboEstado);
 		
 		scrollPaneA = new JScrollPane();

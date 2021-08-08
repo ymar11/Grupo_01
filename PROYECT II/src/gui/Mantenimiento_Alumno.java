@@ -18,6 +18,9 @@ import javax.swing.table.DefaultTableModel;
 
 import arreglos.ArregloAlumnos;
 import clases.Alumno;
+import clases.Matricula;
+import clases.Retiro;
+import libreria.Libr;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -56,6 +59,7 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 	
 	//declaracion global
 	ArregloAlumnos aa = new ArregloAlumnos (); 
+	private JTextField txtEstado;
 
 	/**
 	 * Launch the application.
@@ -151,14 +155,20 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 		txtEdad.setBounds(237, 88, 86, 20);
 		getContentPane().add(txtEdad);
 		
-		cboEstado = new JComboBox();
-		cboEstado.setModel(new DefaultComboBoxModel(new String[] {"Registrado ", "Matriculado ", "Retirado"}));
-		cboEstado.setBounds(84, 140, 115, 22);
+		cboEstado = new JComboBox <String> (); 
+		cboEstado.addActionListener(this);
+		//cboEstado.setEnabled(false);
+		cboEstado.setModel(new DefaultComboBoxModel(new String[] {"Registrado", "Matr\u00EDculado", "Retirado"})); 
+		cboEstado.setBounds(180, 141, 115, 22);
 		getContentPane().add(cboEstado);
+		
+		
 		
 		scrollPaneA = new JScrollPane();
 		scrollPaneA.setBounds(10, 200, 697, 227);
 		getContentPane().add(scrollPaneA);
+		
+		
 		
 		
 		tblTabla = new JTable();
@@ -220,10 +230,18 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 		btnReportar.setBounds(342, 166, 149, 23);
 		getContentPane().add(btnReportar);
 		
+		txtEstado = new JTextField();
+		txtEstado.setColumns(10);
+		txtEstado.setBounds(84, 142, 86, 20);
+		getContentPane().add(txtEstado);
+		
 		listar ();
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == cboEstado) {
+			actionPerformedCboEstado(e);
+		}
 		if (e.getSource() == btnReportar) {
 			actionPerformedBtnReportar(e);
 		}
@@ -237,24 +255,30 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 			actionPerformedBtnAdicionar(e);
 		}
 	}
+	
+	/* int estado () {
+		return (int) cboEstado.getSelectedItem(); 
+	}  */ 
+	
+	
 	protected void actionPerformedBtnAdicionar(ActionEvent e) {
 		/**
 		 * Adiciona un nuevo alumno validando que el código no se repita
 		 */
-		 int codigo = leerCodigo ();
+		 
+	    int codAlumno = aa.codigoCorrelativo();
 		
-		if (aa.buscar(codigo) == null) {
-			
-			// recuperamos valores de la caja de texto
+		if (aa.buscar(codAlumno)==null) {// recuperamos valores de la caja de texto
 			String nombre = leerNombre ();
 			String apellidos = leerApellido();
-			String dni = leerDni ();
+			int dni = leerDni ();
 			int edad = leerEdad ();
 			int celular  = leerCelular ();
-			int  estado = leerEstado ();
+			String  estado = estado();
+			
 			
 			//creamos el objeto alumno  
-			Alumno nuevo = new Alumno (codigo, nombre, apellidos, dni, edad, celular,  estado);
+			Alumno nuevo = new Alumno (codAlumno, nombre, apellidos, dni, edad, celular,  estado);
 			
 			//adicionamos al arrayList 
 			aa.adicionar(nuevo);
@@ -262,16 +286,13 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 			limpieza ();
 			
 			mensaje ("Datos registrados con éxito");
-			
-			
-		} else {
-			mensaje ("El código de alumnos ya existe");
-		}	 
-		
-		
-		
-		
+	} else {
+		mensaje("EL CODIGO DE ALUMNO YA EXISTE");
+	    limpieza();
 	}
+	}
+	
+	 
 		 
 
 	protected void actionPerformedBtnModificar(ActionEvent e) {
@@ -282,10 +303,10 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 			 //Recuperamos valores de las cajas texto
 				String nombre = leerNombre ();
 				String apellidos = leerApellido();
-				String dni = leerDni ();
+				int dni = leerDni ();
 				int edad = leerEdad ();
 				int celular  = leerCelular ();
-				int  estado = leerEstado ();
+				String  estado = estado ();
 						 
 
 			 Alumno x = aa.buscar(codigo);
@@ -304,29 +325,26 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 
 		 }else {
 			 mensaje("El código de alumno no existe");
-		 }
-		
-		
+		 }				
 	}
 	
 	
 	protected void actionPerformedBtnEliminar(ActionEvent e) {
 		 
-		int codigo = leerCodigo();  
-			if (aa.buscar(codigo)==null ) {
+           int codigo = leerCodigo();  
+			if (aa.buscar(leerCodigo())==null ) {
 				mensaje ("El código no existe");
 			} else  {
-				Alumno x = aa.buscar(codigo);
+				Alumno x = aa.buscar(leerCodigo());
 				aa.eliminar(x);
 				listar ();
 				mensaje (" El alumno fue eliminado con exito");
 			}
 			
-			limpieza ();	
-		
-	}
-	
-	
+			limpieza ();			
+	 }  	
+
+
 	
 	protected void actionPerformedBtnReportar(ActionEvent e) {
 		
@@ -341,12 +359,13 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 		txtDni.setText("");
 		txtEdad.setText("");
 		txtCelular.setText("");
-		cboEstado.getSelectedIndex();
+		cboEstado.getSelectedItem();
 		txtCodigo.requestFocus();
 	}
 
    	
    	void listar() {
+   		
    		//Obtenemos el modelo de la tabla
 		DefaultTableModel modelo = (DefaultTableModel) tblTabla.getModel();
 
@@ -363,8 +382,10 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 		aa.obtener(i).getDni(),
 		aa.obtener(i).getEdad(),
 		aa.obtener(i).getCelular(),
-		aa.obtener(i).getEstado(),		
-		};
+		aa.obtener(i).getEstado()
+		// Libr.categoriaEstado [Alumno.getEstado()]
+				 
+		};		 
 		
 		//Añadir la fila creado al modelo
 		modelo.addRow(fila);
@@ -390,6 +411,7 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 	//  Métodos que retornan un valor (sin parámetros)
  	int leerCodigo () {
  		return Integer.parseInt(txtCodigo.getText().trim());
+ 		
  	}
  	String leerNombre() {
  		return txtNombre.getText().trim();
@@ -397,8 +419,8 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
  	String leerApellido() {
  		return txtApellido.getText().trim();
  	}
- 	String leerDni () {
- 		return txtDni.getText().trim();
+ 	int leerDni () {
+ 		return Integer.parseInt(txtDni.getText().trim());
  	}
  	int leerEdad () {
  		return Integer.parseInt(txtEdad.getText().trim());
@@ -408,9 +430,15 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
  		return Integer.parseInt(txtCelular.getText().trim());
  	}
  	 
- 	int leerEstado () {
- 		return cboEstado.getSelectedIndex();
- 	}
+ 	/*  String leerEstado () {
+ 		return cboEstado.getSelectedItem();
+ 	}  */ 
+ 	 
+ 	//metodo creado 
+ 	String estado () {
+ 		 return txtEstado.getText().trim();
+ 	 }
+ 	
  	
  	
 	void navegar(){
@@ -428,8 +456,9 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 		txtEdad.setText("" +tblTabla.getValueAt(fila, 4));
 		
 		txtCelular.setText("" +tblTabla.getValueAt(fila, 5));
-		cboEstado.getSelectedIndex();  // txtEstado.getStelec("" +tblTabla.getValueAt(fila, 4));
+//		cboEstado.getSelectedIndex();  // txtEstado.getStelec("" +tblTabla.getValueAt(fila, 4));
 		
+		cboEstado.setActionCommand("" + tblTabla.getValueAt(fila, 6));
 
 	}
 
@@ -462,5 +491,9 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 	}
 	protected void keyPressedTblTabla(KeyEvent e) {
 		navegar ();
+	}
+	
+	protected void actionPerformedCboEstado(ActionEvent e) {
+		txtEstado.setText(" " + cboEstado.getSelectedItem()); 
 	}
 }

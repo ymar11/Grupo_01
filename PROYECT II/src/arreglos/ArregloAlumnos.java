@@ -32,8 +32,9 @@ import clases.Alumno;
 					String [] s; // arreglo llamado S
 					
 					// para guardar los valores recuperados 
-					int codAlumno, edad, celular, estado;
-					String nombres,apellidos, dni;
+					int codAlumno, edad, celular;
+					String nombres,apellidos , estado;
+					int dni;
 					
 					
 					// cargar el archivo en memoria modo lectura 
@@ -47,10 +48,10 @@ import clases.Alumno;
 						codAlumno = Integer.parseInt(s[0].trim () ) ;
 						nombres = s [1].trim();
 						apellidos = s [2].trim();
-						dni = s [3].trim();
+						dni     =  Integer.parseInt (s [3].trim());
 						edad    = Integer.parseInt(s [4].trim ());
 						celular = Integer.parseInt(s [5].trim ());
-						estado  = Integer.parseInt(s [6].trim ());	
+						estado  = (s [6].trim ());	
 						
 						// adicionarlos al arrayList
 						adicionar (new Alumno (codAlumno, nombres, apellidos,dni, edad, celular, estado) );
@@ -127,8 +128,17 @@ import clases.Alumno;
 				actualizarArchivo(); //vuelve a pasar el contenido del array alarchivo Txt 		
 			}
 			
+			 public int codigoCorrelativo() {
+				  if (tamanio() == 0) {
+				  return 202010001 ;
+			  }else
+				  return obtener(tamanio()-1).getCodAlumno() + 1;
+				  }
+			
 			public void actualizarArchivo () {
 				grabarAlumnos(); 		
 			}	 
+			
+			
 				  
 }

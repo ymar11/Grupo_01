@@ -5,14 +5,14 @@ public class Alumno {
 	private int codAlumno;
 	private String nombres;
 	private String apellidos;
-	private String dni;
+	private int dni;
 	private int edad ;
 	private int celular;	
-	private int  estado;
+	private  String  estado;
 	
 	
 	// constructor
-	public Alumno(int codAlumno, String nombres, String apellidos, String dni, int edad, int celular, int estado) {
+	public Alumno(int codAlumno, String nombres, String apellidos, int dni, int edad, int celular, String estado) {
 	//	super();
 		this.codAlumno = codAlumno;
 		this.nombres = nombres;
@@ -23,8 +23,6 @@ public class Alumno {
 		this.estado = estado;
 	}
 
-	
-	// generacion de get and set
 
 	public int getCodAlumno() {
 		return codAlumno;
@@ -56,12 +54,12 @@ public class Alumno {
 	}
 
 
-	public String getDni() {
+	public int getDni() {
 		return dni;
 	}
 
 
-	public void setDni(String dni) {
+	public void setDni(int dni) {
 		this.dni = dni;
 	}
 
@@ -86,13 +84,14 @@ public class Alumno {
 	}
 
 
-	public int getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
 
-	public void setEstado(int estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
-	}	
+	}
 
+	
 }

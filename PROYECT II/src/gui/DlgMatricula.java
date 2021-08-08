@@ -37,8 +37,6 @@ public class DlgMatricula extends JDialog implements ActionListener, MouseListen
 	private JTextField txtAlumno;
 	private JTextField txtCurso;
 	private DefaultTableModel modelo;
-	
-	ArregloMatricula am = new ArregloMatricula(); 
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JButton btnEliminar;
@@ -52,6 +50,9 @@ public class DlgMatricula extends JDialog implements ActionListener, MouseListen
 	private JLabel lblNewLabel_4;
 	private JTextField txtFecha;
 	private JLabel lblNewLabel_5;
+	
+	ArregloMatricula am = new ArregloMatricula(); 
+	
 	
 	/**
 	 * Launch the application.
@@ -242,6 +243,7 @@ public class DlgMatricula extends JDialog implements ActionListener, MouseListen
 	
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
 		int codAlumno = leerCodigoAlumno();
+		
 		if (am.buscar(codAlumno)==null) {
 		int codCurso = leerCodigoCurso();
 		int numMatricula = leerNumMatricula();
