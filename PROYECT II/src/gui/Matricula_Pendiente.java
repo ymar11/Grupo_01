@@ -83,8 +83,8 @@ public class Matricula_Pendiente extends JDialog {
 				imprimir("Apellidos              \t :  " + a.getApellidos());
 				imprimir("DNI N°                 \t :  " + a.getDni());
 				imprimir("Edad                      \t :  " + a.getEdad());
-//				imprimir("Estado de matrícula \t :  " + Libr.categoriaEstado [a.getEstado()]);
-				imprimir("Estado de matrícula \t :  " +  a.getEstado());
+                imprimir("Estado de matrícula \t :  " + Libr.categoriaEstado [a.getEstado()]);
+				// imprimir("Estado de matrícula \t :  " +  a.getEstado());
 
 
 				

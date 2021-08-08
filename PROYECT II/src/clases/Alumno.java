@@ -8,11 +8,11 @@ public class Alumno {
 	private int dni;
 	private int edad ;
 	private int celular;	
-	private  String  estado;
+	private  int  estado;
 	
 	
 	// constructor
-	public Alumno(int codAlumno, String nombres, String apellidos, int dni, int edad, int celular, String estado) {
+	public Alumno(int codAlumno, String nombres, String apellidos, int dni, int edad, int celular, int estado) {
 	//	super();
 		this.codAlumno = codAlumno;
 		this.nombres = nombres;
@@ -84,14 +84,14 @@ public class Alumno {
 	}
 
 
-	public String getEstado() {
+	public int getEstado() {
 		return estado;
 	}
 
 
-	public void setEstado(String estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
 	}
 
-	
+		
 }

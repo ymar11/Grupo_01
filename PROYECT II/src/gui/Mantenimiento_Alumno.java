@@ -274,7 +274,7 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 			int dni = leerDni ();
 			int edad = leerEdad ();
 			int celular  = leerCelular ();
-			String  estado = estado();
+			int  estado = leerEstado();
 			
 			
 			//creamos el objeto alumno  
@@ -306,7 +306,7 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 				int dni = leerDni ();
 				int edad = leerEdad ();
 				int celular  = leerCelular ();
-				String  estado = estado ();
+				int  estado = leerEstado ();
 						 
 
 			 Alumno x = aa.buscar(codigo);
@@ -430,14 +430,14 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
  		return Integer.parseInt(txtCelular.getText().trim());
  	}
  	 
- 	/*  String leerEstado () {
- 		return cboEstado.getSelectedItem();
- 	}  */ 
+ 	 int  leerEstado () {
+ 		return cboEstado.getSelectedIndex();
+ 	}  
  	 
- 	//metodo creado 
+/*  	//metodo creado 
  	String estado () {
  		 return txtEstado.getText().trim();
- 	 }
+ 	 }  */ 
  	
  	
  	

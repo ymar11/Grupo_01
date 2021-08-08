@@ -32,8 +32,8 @@ import clases.Alumno;
 					String [] s; // arreglo llamado S
 					
 					// para guardar los valores recuperados 
-					int codAlumno, edad, celular;
-					String nombres,apellidos , estado;
+					int codAlumno, edad, celular, estado;
+					String nombres,apellidos  ;
 					int dni;
 					
 					
@@ -51,7 +51,7 @@ import clases.Alumno;
 						dni     =  Integer.parseInt (s [3].trim());
 						edad    = Integer.parseInt(s [4].trim ());
 						celular = Integer.parseInt(s [5].trim ());
-						estado  = (s [6].trim ());	
+						estado  = Integer.parseInt(s[6].trim()); 	
 						
 						// adicionarlos al arrayList
 						adicionar (new Alumno (codAlumno, nombres, apellidos,dni, edad, celular, estado) );
