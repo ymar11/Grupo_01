@@ -12,9 +12,14 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-
+import arreglos.ArregloAlumnos;
+import arreglos.ArregloCurso;
 import arreglos.ArregloMatricula;
 import clases.Matricula;
+
+
+import clases.Alumno;
+import clases.Curso;
 
 import java.awt.event.ActionListener;
 import java.util.Calendar;
@@ -52,6 +57,8 @@ public class DlgMatricula extends JDialog implements ActionListener, MouseListen
 	private JLabel lblNewLabel_5;
 	
 	ArregloMatricula am = new ArregloMatricula(); 
+	ArregloAlumnos aa = new ArregloAlumnos ();
+	ArregloCurso ac = new ArregloCurso ();
 	
 	
 	/**
@@ -240,11 +247,18 @@ public class DlgMatricula extends JDialog implements ActionListener, MouseListen
 		}
 	}
 	
-	
+	//boton adicionar 
 	protected void actionPerformedBtnNewButton(ActionEvent e) {
+		 Alumno a = aa.buscar(leerCodigoAlumno());
+
+		 
+		if (a!=null ) {
+			 
+		a.setEstado(1); 
+		
 		int codAlumno = leerCodigoAlumno();
 		
-		if (am.buscar(codAlumno)==null) {
+		
 		int codCurso = leerCodigoCurso();
 		int numMatricula = leerNumMatricula();
 		String fecha = fecha();
