@@ -44,21 +44,19 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 	private JLabel lblNewLabel_3;
 	private JTextField txtAsignatura;
 	private JLabel lblNewLabel_4;
-	private JComboBox comboBox;
+	private JComboBox  comboBox;
 	private JButton btnAdicionar;
 	private JButton btnEliminar;
 	private JButton btnModificar;
 	private JButton btnConsultar;
-	private JButton btnReportar;
 	private JScrollPane scrollPane;
 	private JTable table;
-	private JScrollPane scrollPane_1;
-	private JTextArea txtS;
 	
 
 	//declaración global
 	
 	ArregloCurso ac = new ArregloCurso();
+	private JTextArea txtS;
 	
 	
 	/**
@@ -69,6 +67,9 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 			gui_curso dialog = new gui_curso();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			// CENTRAR VENTANA EN LA PANTALLA
+			dialog.setLocationRelativeTo(null);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -78,8 +79,9 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 	 * Create the dialog.
 	 */
 	public gui_curso() {
+		setTitle("CURSOS  ");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(gui_curso.class.getResource("/imagenes/Asignatura.png")));
-		setBounds(100, 100, 933, 620);
+		setBounds(100, 100, 865, 453);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(SystemColor.inactiveCaption);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -92,25 +94,25 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 		contentPanel.add(lblNewLabel);
 		
 		txtCodigo = new JTextField();
-		txtCodigo.setBounds(77, 16, 58, 19);
+		txtCodigo.setBounds(91, 15, 96, 19);
 		contentPanel.add(txtCodigo);
 		txtCodigo.setColumns(10);
 		
 		lblNewLabel_1 = new JLabel("Horas");
-		lblNewLabel_1.setBounds(169, 16, 46, 19);
+		lblNewLabel_1.setBounds(223, 21, 46, 19);
 		contentPanel.add(lblNewLabel_1);
 		
 		txtHoras = new JTextField();
 		txtHoras.setColumns(10);
-		txtHoras.setBounds(230, 16, 58, 19);
+		txtHoras.setBounds(262, 21, 58, 19);
 		contentPanel.add(txtHoras);
 		
 		lblNewLabel_2 = new JLabel("Creditos");
-		lblNewLabel_2.setBounds(330, 16, 70, 19);
+		lblNewLabel_2.setBounds(362, 21, 70, 19);
 		contentPanel.add(lblNewLabel_2);
 		
 		txtCreditos = new JTextField();
-		txtCreditos.setBounds(386, 16, 96, 19);
+		txtCreditos.setBounds(418, 21, 96, 19);
 		contentPanel.add(txtCreditos);
 		txtCreditos.setColumns(10);
 		
@@ -124,13 +126,15 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 		txtAsignatura.setColumns(10);
 		
 		lblNewLabel_4 = new JLabel("Ciclo");
-		lblNewLabel_4.setBounds(244, 67, 46, 16);
+		lblNewLabel_4.setBounds(223, 65, 46, 16);
 		contentPanel.add(lblNewLabel_4);
 		
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto"}));
-		comboBox.setBounds(300, 63, 137, 20);
+		comboBox.setBounds(262, 63, 113, 20);
 		contentPanel.add(comboBox);
+		
+		
 		
 		btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.setIcon(new ImageIcon(gui_curso.class.getResource("/imagenes/add.png")));
@@ -141,7 +145,7 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 		btnEliminar = new JButton("Eliminar");
 		btnEliminar.setIcon(new ImageIcon(gui_curso.class.getResource("/imagenes/delete.png")));
 		btnEliminar.addActionListener(this);
-		btnEliminar.setBounds(758, 15, 129, 30);
+		btnEliminar.setBounds(715, 15, 129, 30);
 		contentPanel.add(btnEliminar);
 		
 		btnModificar = new JButton("Modificar");
@@ -153,18 +157,12 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 		btnConsultar = new JButton("Consultar");
 		btnConsultar.setIcon(new ImageIcon(gui_curso.class.getResource("/imagenes/buscar.png")));
 		btnConsultar.addActionListener(this);
-		btnConsultar.setBounds(758, 63, 129, 30);
+		btnConsultar.setBounds(715, 63, 129, 30);
 		contentPanel.add(btnConsultar);
-		
-		btnReportar = new JButton("Reportar");
-		btnReportar.setIcon(new ImageIcon(gui_curso.class.getResource("/imagenes/reporte.png")));
-		btnReportar.addActionListener(this);
-		btnReportar.setBounds(701, 341, 170, 30);
-		contentPanel.add(btnReportar);
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportBorder(new LineBorder(new Color(0, 0, 0)));
-		scrollPane.setBounds(37, 190, 858, 141);
+		scrollPane.setBounds(21, 139, 807, 181);
 		contentPanel.add(scrollPane);
 		
 		
@@ -175,8 +173,6 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 		table.addMouseListener(this);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
 			},
 			new String[] {
 				"Codigo", "Horas", "Creditos", "Asignatura", "Ciclo"
@@ -189,17 +185,17 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 				return columnTypes[columnIndex];
 			}
 		});
+		table.getColumnModel().getColumn(0).setPreferredWidth(92);
+		table.getColumnModel().getColumn(2).setPreferredWidth(69);
+		table.getColumnModel().getColumn(4).setPreferredWidth(86);
 		
 		
 		
 		scrollPane.setViewportView(table);
 		
-		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(37, 386, 862, 157);
-		contentPanel.add(scrollPane_1);
-		
 		txtS = new JTextArea();
-		scrollPane_1.setViewportView(txtS);
+		txtS.setBounds(41, 361, 13, 10);
+		contentPanel.add(txtS);
 	
 		listar();
 
@@ -207,9 +203,6 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 	
 	
 	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == btnReportar) {
-			actionPerformedBtnReportar(arg0);
-		}
 		if (arg0.getSource() == btnEliminar) {
 			actionPerformedBtnEliminar(arg0);
 		}
@@ -327,10 +320,10 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 					}		
 	}
 			
-	 // Métodos tipo void (con parámetros)
+ 	 // Métodos tipo void (con parámetros)
 		   	void imprimir(String s) {
 		   	txtS.append(s + "\n");
-		   	}
+		   	}  
 			
 			//  Métodos tipo void (con parámetros)
 			void mensaje(String s) {
@@ -437,23 +430,12 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 	protected void keyReleasedTable(KeyEvent arg0) {
 		navegar();
 	}
-	protected void actionPerformedBtnReportar(ActionEvent arg0) {
-		
-		/**
-		* Visualiza un reporte
-		*/
-		txtS.setText("");
-		imprimir("La cantidad de Cursos matriculados es: " + ac.tamanio());
-						
-	}
 
-		//  Métodos tipo void (sin parámetros)
+ 	//  Métodos tipo void (sin parámetros)
 		
 		void imprimir() {
 			imprimir("");
-			}
-		
-	
+			} 
 	}
 	
 	

@@ -33,6 +33,7 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.awt.SystemColor;
 import javax.swing.UIManager;
+import java.awt.Color;
 
 public class Mantenimiento_Alumno extends JDialog implements ActionListener, MouseListener, KeyListener {
 	private JLabel lblCodigo;
@@ -48,13 +49,11 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 	private JTextField txtDni;
 	private JTextField txtCelular;
 	private JTextField txtEdad;
-	private JComboBox cboEstado;
+	private JComboBox <String> cboEstado;
 	private JScrollPane scrollPaneA;
-	private JScrollPane scrollPaneB;
 	private JButton btnAdicionar;
 	private JButton btnModificar;
 	private JButton btnEliminar;
-	private JButton btnReportar;
 	private JTable tblTabla;
 	
 	//declaracion global
@@ -87,7 +86,7 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 		getContentPane().setFont(new Font("Tahoma", Font.BOLD, 12));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Mantenimiento_Alumno.class.getResource("/imagenes/sistema.png")));
 		setTitle("MANTENIMIENTO |  ALUMNOS ");
-		setBounds(100, 100, 740, 631);
+		setBounds(100, 100, 740, 546);
 		getContentPane().setLayout(null);
 		
 		lblCodigo = new JLabel("Codigo");
@@ -155,23 +154,32 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 		txtEdad.setBounds(237, 88, 86, 20);
 		getContentPane().add(txtEdad);
 		
-		cboEstado = new JComboBox <String> (); 
+		/* cboEstado = new JComboBox <String> (); 
 		cboEstado.addActionListener(this);
 		//cboEstado.setEnabled(false);
 		cboEstado.setModel(new DefaultComboBoxModel(new String[] {"Registrado", "Matr\u00EDculado", "Retirado"})); 
 		cboEstado.setBounds(180, 141, 115, 22);
+		getContentPane().add(cboEstado);*/ 
+		
+				
+		cboEstado = new JComboBox <String> ();
+		cboEstado.addActionListener(this);
+		cboEstado.setEnabled(true);
+		cboEstado.setModel(new DefaultComboBoxModel <String> (Libr.categoriaEstado));
+		cboEstado.setBounds(180, 141, 115, 22);
 		getContentPane().add(cboEstado);
 		
 		
-		
 		scrollPaneA = new JScrollPane();
-		scrollPaneA.setBounds(10, 200, 697, 227);
+		scrollPaneA.setBounds(10, 200, 697, 258);
 		getContentPane().add(scrollPaneA);
 		
 		
 		
 		
 		tblTabla = new JTable();
+		tblTabla.setForeground(new Color(0, 0, 0));
+		tblTabla.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		tblTabla.addKeyListener(this);
 		tblTabla.addMouseListener(this);
 		tblTabla.setModel(new DefaultTableModel(
@@ -194,10 +202,6 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 		tblTabla.getColumnModel().getColumn(3).setPreferredWidth(80);
 		tblTabla.getColumnModel().getColumn(5).setPreferredWidth(78);
 		scrollPaneA.setViewportView(tblTabla);
-		
-		scrollPaneB = new JScrollPane();
-		scrollPaneB.setBounds(10, 455, 697, 105);
-		getContentPane().add(scrollPaneB);
 		
 		btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.setBackground(UIManager.getColor("FormattedTextField.selectionForeground"));
@@ -223,13 +227,6 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 		btnEliminar.setBounds(342, 115, 149, 39);
 		getContentPane().add(btnEliminar);
 		
-		btnReportar = new JButton("Reportar");
-		btnReportar.setBackground(UIManager.getColor("FormattedTextField.selectionForeground"));
-		btnReportar.setFont(new Font("Sitka Small", Font.BOLD, 13));
-		btnReportar.addActionListener(this);
-		btnReportar.setBounds(342, 166, 149, 23);
-		getContentPane().add(btnReportar);
-		
 		txtEstado = new JTextField();
 		txtEstado.setColumns(10);
 		txtEstado.setBounds(84, 142, 86, 20);
@@ -241,9 +238,6 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == cboEstado) {
 			actionPerformedCboEstado(e);
-		}
-		if (e.getSource() == btnReportar) {
-			actionPerformedBtnReportar(e);
 		}
 		if (e.getSource() == btnEliminar) {
 			actionPerformedBtnEliminar(e);
@@ -343,12 +337,6 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 			
 			limpieza ();			
 	 }  	
-
-
-	
-	protected void actionPerformedBtnReportar(ActionEvent e) {
-		
-	}
 	
 	
 	//  Métodos tipo void (sin parámetros)
@@ -382,9 +370,8 @@ public class Mantenimiento_Alumno extends JDialog implements ActionListener, Mou
 		aa.obtener(i).getDni(),
 		aa.obtener(i).getEdad(),
 		aa.obtener(i).getCelular(),
-		aa.obtener(i).getEstado()
-		// Libr.categoriaEstado [Alumno.getEstado()]
-				 
+		//aa.obtener(i).getEstado()		
+        Libr.categoriaEstado[aa.obtener(i).getEstado()]				 
 		};		 
 		
 		//Añadir la fila creado al modelo
