@@ -32,7 +32,7 @@ import java.awt.Toolkit;
 import java.awt.SystemColor;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
-
+ 
 public class gui_curso extends JDialog implements ActionListener, MouseListener, KeyListener {
 
 	private final JPanel contentPanel = new JPanel();

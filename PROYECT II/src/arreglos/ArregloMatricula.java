@@ -115,4 +115,26 @@ public class ArregloMatricula {
 		  grabarMatricula();
 	  }
 	  
+	  
+	  public boolean CodigoAlumno(int codigoAlumno) {
+			for (int i=tamaño()-1; i>=0; i--)
+				if (obtener(i).getCodAlumno() == codigoAlumno)
+					if (obtener(i).getEstado() == 0)
+						return false;
+					else
+						return true;
+			return true;
+		}
+		public boolean CodigoCurso(int codigoCurso) {
+			for (int i=tamaño()-1; i>=0; i--)
+				if (obtener(i).getCodCurso() == codigoCurso)
+					if (obtener(i).getEstado() == 0)
+						return false;
+					else
+						return true;
+			return true;
+		}
 }
+	   
+
+	  
