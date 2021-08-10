@@ -11,45 +11,15 @@ import clases.Curso;
 public class ArregloCurso {
 	
 //  Atributo privado
-	private ArrayList <Curso> curso;
-//  Constructor
-	
+	private ArrayList <Curso> cur;
+
+	//  Constructor	
 	public ArregloCurso() {
 		
-		curso = new ArrayList <Curso> ();
+		cur = new ArrayList <Curso> ();
 		cargarArchivo ();	
-	
 	}
 	
-	//  Operaciones públicas básicas
-	public void adicionar (Curso x) {
-		curso.add(x);
-		grabarCursos();
-	}
-
-
-	
-	public int tamanio () {
-		return curso.size();
-		}
-
-		public Curso obtener(int i) {
-			return curso.get(i);
-		}
-	
-	public Curso buscar(int codigo) {
-		for (int i = 0; i < tamanio(); i++) {
-			if (obtener(i).getCodCurso()==codigo) 
-			return obtener(i);
-			}
-			return null;
-			}
-			
-	public void eliminar(Curso x) {
-		curso.remove(x); // se elimina en memoria
-		cargarArchivo();// vuelve a pasar el contenido del arraylist al archivo
-				
-		}
 				
 		public void cargarArchivo() {
 			
@@ -75,9 +45,9 @@ public class ArregloCurso {
 							
 							//recuperar los valores
 							codCurso = Integer.parseInt(s[0].trim());
-							ciclo=Integer.parseInt(s[1].trim());
-							creditos=Integer.parseInt(s[2].trim());
-							horas=Integer.parseInt(s[3].trim());														
+							ciclo    = Integer.parseInt(s[1].trim());
+							creditos = Integer.parseInt(s[2].trim());
+							horas    = Integer.parseInt(s[3].trim());														
 							asignatura= s[4].trim();
 							
 							//adicionarlos al Arraylist
@@ -85,13 +55,18 @@ public class ArregloCurso {
 					}
 						br.close();
 					}
+					
 					catch (Exception e) {
 						// TODO: handle exception
-						 System.out.println("Error: cargarCursos-->: "+e.getMessage() );
+						 System.out.println("Error: cargarCursos-->: " + e.getMessage() );
 					}				
 						
 			}
 		
+		public void adicionar (Curso x) {
+			cur.add(x);
+			grabarCursos();
+		}
 				
 		
 		void grabarCursos() {
@@ -124,28 +99,45 @@ public class ArregloCurso {
 		}
 		catch (Exception e) {
 			// TODO: handle exception
-              System.out.println("Error: garbarCursos-->: " + e.getMessage() );
+              System.out.println("Error: grabarCursos-->: " + e.getMessage() );
 		}
 			
 	}		
+		
+		
+		//  Operaciones públicas básicas		
+		public int tamanio () {
+			return cur.size();
+			}
+
+			public Curso obtener(int i) {
+				return cur.get(i);
+			}
+		
+		public Curso buscar(int codigo) {
+			for (int i = 0; i < tamanio(); i++) {
+				if (obtener(i).getCodCurso()==codigo) 
+				return obtener(i);
+				}
+				return null;
+				}
+				
+		public void eliminar(Curso x) {
+			cur.remove(x); // se elimina en memoria
+			actualizarArchivo();// vuelve a pasar el contenido del arraylist al archivo
+					
+			}
+
 	public int codigoCorrelativo() {
-		if (curso.size() == 0)
+		if (cur.size() == 0)
 		return 101;
 		else
 		return obtener((tamanio()-1)).getCodCurso() + 1;
 		}
 	
+	public void actualizarArchivo () {
+		grabarCursos(); 		
+	}	 
+	
 
 		}
-		
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-

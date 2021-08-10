@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 import arreglos.ArregloCurso;
 import clases.Curso;
+import libreria.Libr;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -311,7 +312,9 @@ public class gui_curso extends JDialog implements ActionListener, MouseListener,
 									ac.obtener(i).getHoras(),
 									ac.obtener(i).getCreditos(),
 									ac.obtener(i).getAsignatura(),
-									ac.obtener(i).getCiclo()
+									//ac.obtener(i).getCiclo()
+					                Libr.estadosCiclo[ac.obtener(i).getCiclo()]				 
+
 									
 					};
 					
